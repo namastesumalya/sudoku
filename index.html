@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="./app.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="custom.min.css">
-    </style>
 </head>
 
 <body>
@@ -24,6 +23,9 @@
             <a href="#" class="nav-logo">
                 Sudoku
             </a>
+            <div class="fullscreen-btn" onclick="toggleFullscreen()">
+                Enter Fullscreen
+            </div>
             <div class="dark-mode-toggle" id="dark-mode-toggle">
                 <img src="moon.png" height="30px" width="30px">
             </div>
@@ -185,6 +187,28 @@
     <script src="./static/js/constant.js"></script>
     <script src="./static/js/sudoku.js"></script>
     <script src="./static/js/app.js"></script>
+    <script>
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            const fullscreenBtn = document.querySelector('.fullscreen-btn');
+            if (document.fullscreenElement) {
+                fullscreenBtn.textContent = 'Exit Fullscreen';
+            } else {
+                fullscreenBtn.textContent = 'Enter Fullscreen';
+            }
+        });
+    </script>
 </body>
 
 </html>
